@@ -3,7 +3,7 @@ $(document).ready(function () {
 
   function getResults() {
     $('.loading').show()
-    var search = $(this).val()
+    var search = $('#search-input').val()
     $('body').append("<h1>searching " + search + "</h1>")
     
     $.ajax({
