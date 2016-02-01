@@ -29,6 +29,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 .search i:hover {
   color: rgb(233, 30, 99);
 }
+
 #search-input {
   border: none;
   width: 0px;
@@ -40,3 +41,47 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
      -moz-transition: all .5s;
           transition: all .5s;
 }
+
+.loading {
+  margin-top: 10px;
+  margin-left:30%
+}
+
+.products {
+  max-width: 1000px;
+  display: flex;
+  margin: 0 auto;
+}
+
+.products div {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.flipkart {
+  border-right: 1px solid #aaa;
+}
+.col-6 {
+  width: 50%;
+}
+
+.flipkart, .snapdeal {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.products .image {
+  max-width: 200px;
+  margin: 0 auto;
+  height: 200px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.products span {
+  font-size: 2em;
+}
+
+
