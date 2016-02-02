@@ -1,4 +1,4 @@
-var data = {
+var testData = {
   "products": {
     "flipkart": {
       "emi": "EMI from Rs. 1,019 ",
@@ -28,6 +28,7 @@ $(document).ready(function () {
   
   function getResults() {
     $('.products').hide();
+    $('.error').hide();
     
     $('.loading').show();
     var search = $('#search-input').val();
@@ -39,6 +40,7 @@ $(document).ready(function () {
         $('.search .loading').hide()
       },
       success: function (data) {
+        console.log(data);
         var flipkart = data.products.flipkart,
           snapdeal = data.products.snapdeal,
           $flipkart = $('.products .flipkart'),
@@ -49,16 +51,16 @@ $(document).ready(function () {
         $flipkart.find('.image img').attr('alt', flipkart.title);
         $flipkart.find('.title a').attr('href', flipkart.link);
         $flipkart.find('.title h3').text(flipkart.title);
-        $flipkart.find('.ratings span').html("&#127775; " + flipkart.ratings.replace(/[^0-9]/g, ''));
-        $flipkart.find('.reviews span').text(flipkart.reviews + " reviews");
+        $flipkart.find('.ratings span').html("&#127775; " + (flipkart.ratings || "0").replace(/[^0-9]/g, ''));
+        $flipkart.find('.reviews span').text((flipkart.reviews || "0") + " reviews");
 
         $snapdeal.find('.image').css('background-image', 'url('+snapdeal.image+')');
         $snapdeal.find('.price h4').text(snapdeal.price);
         $snapdeal.find('.image img').attr('alt', snapdeal.title);
         $snapdeal.find('.title a').attr('href', snapdeal.link);
         $snapdeal.find('.title h3').text(snapdeal.title);
-        $snapdeal.find('.ratings span').html("&#127775; " + snapdeal.ratings);
-        $snapdeal.find('.reviews span').text(snapdeal.reviews + " reviews");
+        $snapdeal.find('.ratings span').html("&#127775; " + (snapdeal.ratings || "0"));
+        $snapdeal.find('.reviews span').text((snapdeal.reviews || "0") + " reviews");
         
         $('.products').show();
         
@@ -74,13 +76,20 @@ $(document).ready(function () {
     
   }
   
-  $('input').keypress(function (e) {
+  $('#search-input').keyup(function (e) {
+    adjustSearchBar();
+  });
+  
+  $(document).keypress(function(e) {
+    $('#search-input').focus();
+    adjustSearchBar();
+    
     if (e.which == 13) {
       getResults()
 
       return false
     }
-  })
+  });
 
   function adjustSearchBar() {
     var width = "300px";
