@@ -33,4 +33,6 @@ app.get('/scrape', function (req, res) {
   })
 })
 
-app.listen(port)
+app.listen(port, function() {
+  console.log("Listening at port " + port + "...")
+})

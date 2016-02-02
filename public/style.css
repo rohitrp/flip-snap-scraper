@@ -58,17 +58,16 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
   margin-bottom: 20px;
 }
 
-.flipkart {
-  border-right: 1px solid #aaa;
-}
 .col-6 {
   width: 50%;
 }
 
 .flipkart, .snapdeal {
   max-width: 500px;
-  margin: 0 auto;
-  padding: 20px;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #aaa;
+  border-radius: 30px;
 }
 
 .products .image {
@@ -84,4 +83,20 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
   font-size: 2em;
 }
 
+.error {
+  max-width: 1000px;
+  margin: 0 auto;
+}
 
+.error h2 {
+  font-family: 'Open Sans Condensed', sans-serif;
+  text-align: center;
+}
+
+.winner {
+  border: 1px solid rgb(139, 195, 74) !important;
+}
+
+.loser {
+  border: 1px solid rgb(244, 67, 54);
+}
