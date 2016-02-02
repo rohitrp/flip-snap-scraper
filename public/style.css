@@ -44,7 +44,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 
 .loading {
   margin-top: 10px;
-  margin-left:30%
+  margin-left: 37%;
 }
 
 .products {
@@ -99,4 +99,17 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 
 .loser {
   border: 1px solid rgb(244, 67, 54);
+}
+
+.flipkart h1, .snapdeal h1 {
+  font-family: 'Open Sans Condensed', sans-serif;
+  text-align: center;
+  border-bottom: 1px dashed #aaa;
+  margin-bottom: 50px;
+  padding-bottom: 20px;
+}
+.flipkart-error p, .snapdeal-error p {
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 4em;
+  text-align: center;
 }

@@ -5,8 +5,12 @@ var casper = require('casper')
   , flipDone = false
   , snapDone = false
   , product = {
-      flipkart: {},
-      snapdeal: {}
+      flipkart: {
+        success: false
+      },
+      snapdeal: {
+        success: false
+      }
     }
   , search = casper.create().cli.args[0]
   , flipUrl = 'http://www.flipkart.com/search?q=' + search
@@ -29,6 +33,7 @@ flipCasper.waitForSelector('.results #products .product-unit', function() {
     }
     
     product = {
+      success : true,
       image   : $product.find('.fk-product-thumb img').attr('src'),
       link    : "http://www.flipkart.com" + $product.find('.fk-product-thumb').attr('href'),
       title   : $product.find('.pu-title a').attr('title').trim(),
@@ -38,9 +43,15 @@ flipCasper.waitForSelector('.results #products .product-unit', function() {
       emi     : $product.find('.pu-price .pu-emi').text(),
       features: getFeatures()
     }
+    
     return product
   })
   
+  if (!Boolean(product.flipkart)) {
+    product.flipkart = {
+      success : false
+    }
+  }
 
 }, function() {
   this.echo('Search timed out')
@@ -63,9 +74,10 @@ snapCasper.waitForSelector('#products', function() {
       , $product = $('#products .product-tuple-listing').first()
     
     product = {
-      image : $product.find('.product-tuple-image img').attr('src'),
-      link  : $product.find('.product-tuple-image a').attr('href'),
-      title : $product.find('.product-tuple-description p.product-title').text().trim(),
+      success : true,
+      image   : $product.find('.product-tuple-image img').attr('src'),
+      link    : $product.find('.product-tuple-image a').attr('href'),
+      title   : $product.find('.product-tuple-description p.product-title').text().trim(),
       ratings : $product.find('.rating span').attr('data-rating'),
       reviews : $product.find('.rating p.product-rating-count').text().replace(/[^0-9]/g, ''),
       price   : $product.find('.product-tuple-description .productPrice .product-price').text()
@@ -73,6 +85,12 @@ snapCasper.waitForSelector('#products', function() {
     
     return product
   })
+  
+  if (!Boolean(product.snapdeal)) {
+    product.snapdeal = {
+      success : false
+    }
+  }
   
 }, function() {
   this.echo('Search timed out')

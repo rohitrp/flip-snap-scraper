@@ -28,43 +28,64 @@ $(document).ready(function () {
   
   function getResults() {
     $('.products').hide();
-    $('.error').hide();
-    
+    $('.error').hide();    
     $('.loading').show();
+    
     var search = $('#search-input').val();
 
     $.ajax({
       url: '/scrape?q=' + search,
       dataType: 'json',
       complete: function (res, status) {
-        $('.search .loading').hide()
+        $('#loading').hide()
       },
       success: function (data) {
-        console.log(data);
-        var flipkart = data.products.flipkart,
-          snapdeal = data.products.snapdeal,
-          $flipkart = $('.products .flipkart'),
-          $snapdeal = $('.products .snapdeal')
+        console.log(data)
+        if (data.success) {
+          var flipkart = data.products.flipkart,
+            snapdeal = data.products.snapdeal,
+            $flipkart = $('.products .flipkart'),
+            $snapdeal = $('.products .snapdeal')
+                      
+          if (data.products.flipkart.success) {
+            $('.flipkart-error').hide()
+            $('.flipkart .container').show()
 
-        $flipkart.find('.image').css('background-image', 'url('+flipkart.image+')');
-        $flipkart.find('.price h4').text(flipkart.price);
-        $flipkart.find('.image img').attr('alt', flipkart.title);
-        $flipkart.find('.title a').attr('href', flipkart.link);
-        $flipkart.find('.title h3').text(flipkart.title);
-        $flipkart.find('.ratings span').html("&#127775; " + (flipkart.ratings || "0").replace(/[^0-9]/g, ''));
-        $flipkart.find('.reviews span').text((flipkart.reviews || "0") + " reviews");
+            $flipkart.find('.image').css('background-image', 'url('+flipkart.image+')');
+            $flipkart.find('.price h4').text(flipkart.price);
+            $flipkart.find('.image img').attr('alt', flipkart.title);
+            $flipkart.find('.title a').attr('href', flipkart.link);
+            $flipkart.find('.title h3').text(flipkart.title);
+            $flipkart.find('.ratings span').html("&#127775; " + (flipkart.ratings || "0").replace(/[^0-9]/g, ''));
+            $flipkart.find('.reviews span').text((flipkart.reviews || "0") + " reviews");
+          } else {
+            $('.flipkart-error').show()
+            $('.flipkart .container').hide()
+          }
+        
+          if (data.products.snapdeal.success) {
+            $('.snapdeal-error').hide()
+            $('.snapdeal .container').show()
+            
+            $snapdeal.find('.image').css('background-image', 'url('+snapdeal.image+')');
+            $snapdeal.find('.price h4').text(snapdeal.price);
+            $snapdeal.find('.image img').attr('alt', snapdeal.title);
+            $snapdeal.find('.title a').attr('href', snapdeal.link);
+            $snapdeal.find('.title h3').text(snapdeal.title);
+            $snapdeal.find('.ratings span').html("&#127775; " + (snapdeal.ratings || "0"));
+            $snapdeal.find('.reviews span').text((snapdeal.reviews || "0") + " reviews");
 
-        $snapdeal.find('.image').css('background-image', 'url('+snapdeal.image+')');
-        $snapdeal.find('.price h4').text(snapdeal.price);
-        $snapdeal.find('.image img').attr('alt', snapdeal.title);
-        $snapdeal.find('.title a').attr('href', snapdeal.link);
-        $snapdeal.find('.title h3').text(snapdeal.title);
-        $snapdeal.find('.ratings span').html("&#127775; " + (snapdeal.ratings || "0"));
-        $snapdeal.find('.reviews span').text((snapdeal.reviews || "0") + " reviews");
-        
-        $('.products').show();
-        
-        compare($flipkart, $snapdeal);
+          } else {
+            $('.snapdeal-error').show()
+            $('.snapdeal .container').hide()
+          }
+
+          $('.products').show();
+          
+          compare($flipkart, $snapdeal);
+        } else {
+          $('.error').show()
+        }          
       },
       error: function (res) {        
         $('.error').show();

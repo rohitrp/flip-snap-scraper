@@ -7,6 +7,7 @@ var express = require('express')
   , port = process.env.PORT || 5000
 
 app.use('/', express.static(__dirname + '/public'))
+app.use('/', express.static(__dirname + '/data'))
 
 app.get('/', function (req, res) {
   res.sendFile(process.cwd() + '/public/index.html')
@@ -14,7 +15,7 @@ app.get('/', function (req, res) {
 
 app.get('/scrape', function (req, res) {
   var searchQuery = url.parse(req.url, true).query.q.replace(' ', '+')
-//  fs.unlink('./result.json')
+  //fs.unlink(process.cwd() + '/data/result.json')
   exec('casperjs server.js ' + searchQuery, function(err, stdout, stderr) {
     if (err) {
       console.log(err)
@@ -26,7 +27,7 @@ app.get('/scrape', function (req, res) {
       var results = JSON.parse(fs.readFileSync(__dirname + '/data/result.json', 'utf8'))
 
       res.json({
-        "success" : true,
+        "success" : results.flipkart.success || results.snapdeal.success,
         "products": results
       })
     }
