@@ -24,6 +24,26 @@ var testData = {
   }
 };
 
+var container = 
+      `
+      <div class="container">
+        <div class="image">
+        </div>
+        <div class="price">
+          <h4></h4>
+        </div>
+        <div class="title">
+          <a target="_blank"><h3></h3></a>
+        </div>
+        <div class="ratings">
+          <span></span>
+        </div>
+        <div class="reviews">
+          <span></span>
+        </div>
+      </div>
+      `;
+
 $(document).ready(function () {
   $('.loading').hide();
   $('.products').hide();
@@ -31,6 +51,8 @@ $(document).ready(function () {
   
   function getResults() {
     $('.products').hide();
+    $('.products .container').remove();
+    $('.flipkart, .snapdeal').removeClass('winner loser');
     $('.error').hide();    
     $('.loading').show();
     
@@ -46,6 +68,8 @@ $(document).ready(function () {
         console.log(data)
         
         if (data.success) {
+          $('.products .flipkart, .products .snapdeal').append(container);
+          
           var flipkart = data.products.flipkart,
             snapdeal = data.products.snapdeal,
             $flipkart = $('.products .flipkart'),
@@ -57,7 +81,6 @@ $(document).ready(function () {
 
             $flipkart.find('.image').css('background-image', 'url('+flipkart.image+')');
             $flipkart.find('.price h4').text(flipkart.price);
-            $flipkart.find('.image img').attr('alt', flipkart.title);
             $flipkart.find('.title a').attr('href', flipkart.link);
             $flipkart.find('.title h3').text(flipkart.title);
             $flipkart.find('.ratings span').html("&#127775; " + (flipkart.ratings || "0").replace(/[^0-9]/g, ''));
@@ -73,7 +96,6 @@ $(document).ready(function () {
             
             $snapdeal.find('.image').css('background-image', 'url('+snapdeal.image+')');
             $snapdeal.find('.price h4').text(snapdeal.price);
-            $snapdeal.find('.image img').attr('alt', snapdeal.title);
             $snapdeal.find('.title a').attr('href', snapdeal.link);
             $snapdeal.find('.title h3').text(snapdeal.title);
             $snapdeal.find('.ratings span').html("&#127775; " + (snapdeal.ratings || "0"));
@@ -107,6 +129,13 @@ $(document).ready(function () {
       , flipReviews = data.products.flipkart.reviews || '0'
       , snapReviews = data.products.snapdeal.reviews || '0'
     
+    console.log(flipPrice);
+    console.log(snapPrice);
+    console.log(flipRatings);
+    console.log(snapRatings);
+    console.log(flipReviews);
+    console.log(snapReviews);
+    console.log(+flipRatings.replace(/[^0-9.]+/g, '') > +snapRatings.replace(/[^0-9.]+/g, ''));
     if (+flipPrice.replace(/[^0-9]/g, '') < +snapPrice.replace(/[^0-9]/g, '')) {
       $flipkart.find('.price').addClass('winner')
       $snapdeal.find('.price').addClass('loser')
