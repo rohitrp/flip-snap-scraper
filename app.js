@@ -14,8 +14,8 @@ app.get('/', function (req, res) {
 })
 
 app.get('/scrape', function (req, res) {
-  var searchQuery = url.parse(req.url, true).query.q.replace(' ', '+')
-  //fs.unlink(process.cwd() + '/data/result.json')
+  var searchQuery = url.parse(req.url, true).query.q.replace(/[ ]+/g, '+')
+  console.log(searchQuery)
   exec('casperjs server.js ' + searchQuery, function(err, stdout, stderr) {
     if (err) {
       console.log(err)

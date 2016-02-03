@@ -17,6 +17,8 @@ var casper = require('casper')
   , snapUrl = 'http://www.snapdeal.com/search?keyword=' + search
   , resultPath = './data/result.json'
 
+console.log(search)
+
 flipCasper.start(flipUrl, function() { });
 
 flipCasper.waitForSelector('.results #products .product-unit', function() {
