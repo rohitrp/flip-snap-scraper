@@ -95,21 +95,52 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 
 .winner {
   border: 1px solid rgb(139, 195, 74) !important;
+  border-radius: 30px;
+  padding: 10px;
 }
 
 .loser {
-  border: 1px solid rgb(244, 67, 54);
+  border: 1px solid rgb(244, 67, 54) !important;
+  border-radius: 30px;
+  padding: 10px;
 }
 
-.flipkart h1, .snapdeal h1 {
-  font-family: 'Open Sans Condensed', sans-serif;
+.flipkart .flipkart-logo, .snapdeal .snapdeal-logo {
   text-align: center;
-  border-bottom: 1px dashed #aaa;
   margin-bottom: 50px;
-  padding-bottom: 20px;
+  padding-bottom: 30px;
+  padding-top: 30px;
+  margin-top: 0px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
 }
+
+.flipkart .flipkart-logo {
+  background-color: #027CD5;
+}
+
+.snapdeal .snapdeal-logo {
+  background-color: #37474E;
+  padding: 0;
+}
+
 .flipkart-error p, .snapdeal-error p {
   font-family: 'Open Sans Condensed', sans-serif;
   font-size: 4em;
   text-align: center;
+}
+
+.title a {
+  color: rgb(103, 58, 183);
+  text-decoration: none;
+}
+
+.title a h3:hover {
+  border-bottom: 1px solid rgb(103, 58, 183);
+}
+
+.title a h3 {
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 3em;
+  line-height: 1.5;
 }

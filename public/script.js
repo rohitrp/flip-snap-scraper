@@ -1,6 +1,8 @@
 var testData = {
+  "success": true,
   "products": {
     "flipkart": {
+      "success": true,
       "emi": "EMI from Rs. 1,019 ",
       "features": ["Android v6 OS", "12.3 MP Primary Camera", "5MP Secondary Camera", "Single SIM 4G LTE"],
       "image": "http://img5a.flixcart.com/image/mobile/w/2/z/lg-nexus-5x-lgh791-125x125-imaecgqk6yswfrju.jpeg",
@@ -11,6 +13,7 @@ var testData = {
       "title": "Nexus 5X (Carbon, 16 GB)"
     },
     "snapdeal": {
+      "success": true,
       "image": "http://n2.sdlcdn.com/imgs/a/j/u/198x232/LG-Google-Nexus-5-32-SDL927497489-1-6af39.jpg",
       "link": "http://www.snapdeal.com/product/lg-google-nexus-5-32/562698690#bcrumbSearch:nexus%205",
       "price": "Rs.  26,899",
@@ -41,6 +44,7 @@ $(document).ready(function () {
       },
       success: function (data) {
         console.log(data)
+        
         if (data.success) {
           var flipkart = data.products.flipkart,
             snapdeal = data.products.snapdeal,
@@ -82,20 +86,60 @@ $(document).ready(function () {
 
           $('.products').show();
           
-          compare($flipkart, $snapdeal);
+          compare($flipkart, $snapdeal, data);
         } else {
           $('.error').show()
-        }          
+        } 
       },
       error: function (res) {        
-        $('.error').show();
+        $('.error').show();         
       }
     })
   }
 
-  function compare($flipkart, $snapdeal) {
+  function compare($flipkart, $snapdeal, data) {
+    var flipScore = 0
+      , snapScore = 0
+      , flipPrice = data.products.flipkart.price || '999999999'
+      , snapPrice = data.products.snapdeal.price || '999999999'
+      , flipRatings = data.products.flipkart.ratings || '0'
+      , snapRatings = data.products.snapdeal.ratings || '0'
+      , flipReviews = data.products.flipkart.reviews || '0'
+      , snapReviews = data.products.snapdeal.reviews || '0'
     
-  }
+    if (+flipPrice.replace(/[^0-9]/g, '') < +snapPrice.replace(/[^0-9]/g, '')) {
+      $flipkart.find('.price').addClass('winner')
+      $snapdeal.find('.price').addClass('loser')
+      flipScore++;
+    } else {
+      $snapdeal.find('.price').addClass('winner')
+      $flipkart.find('.price').addClass('loser')
+      snapScore++;
+    }
+    
+    if (+flipRatings.replace(/[^0-9.]+/g, '') > +snapRatings.replace(/[^0-9.]+/g, '')) {
+      $flipkart.find('.ratings').addClass('winner')
+      $snapdeal.find('.ratings').addClass('loser')
+      flipScore++;
+    } else {
+      $snapdeal.find('.ratings').addClass('winner')
+      $flipkart.find('.ratings').addClass('loser')
+      snapScore++;
+    } 
+    
+    if (+flipReviews.replace(/[^0-9]+/g, '') > +snapReviews.replace(/[^0-9]+/g, '')) {
+      $flipkart.find('.reviews').addClass('winner')
+      $snapdeal.find('.reviews').addClass('loser')
+      flipScore++;
+    } else {
+      $snapdeal.find('.reviews').addClass('winner')
+      $flipkart.find('.reviews').addClass('loser')
+      snapScore++;
+    }
+    
+    $flipkart.addClass(flipScore > snapScore ? "winner" : "loser");
+    $snapdeal.addClass(flipScore > snapScore ? "loser" : "winner");
+  };
   
   $('#search-input').keyup(function (e) {
     adjustSearchBar();
