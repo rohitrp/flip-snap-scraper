@@ -92,12 +92,12 @@ $(document).ready(function () {
         if (data.success) {
           $('.products .flipkart, .products .snapdeal').append(container);
 
-          var flipkart = data.results.flipkart.products[0],
-            snapdeal = data.results.snapdeal.products[0],
-            $flipkart = $('.products .flipkart'),
+          var $flipkart = $('.products .flipkart'),
             $snapdeal = $('.products .snapdeal')
 
           if (data.results.flipkart.success) {
+            var flipkart = data.results.flipkart.products[0]
+            
             $('.flipkart-error').hide()
             $('.flipkart .container').show()
 
@@ -113,6 +113,8 @@ $(document).ready(function () {
           }
 
           if (data.results.snapdeal.success) {
+            var snapdeal = data.results.snapdeal.products[0]
+            
             $('.snapdeal-error').hide()
             $('.snapdeal .container').show()
 

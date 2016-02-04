@@ -54,7 +54,8 @@ flipCasper.waitForSelector('.results #products .product-unit', function() {
     
   if (!Boolean(product.flipkart)) {
     product.flipkart = {
-      success : false
+      success : false,
+      products: []
     }
   } else {
     product.flipkart.success = true
@@ -99,7 +100,8 @@ snapCasper.waitForSelector('#products', function() {
     
   if (!Boolean(product.snapdeal)) {
     product.snapdeal = {
-      success : false
+      success : false,
+      products: []
     }
   } else {
     product.snapdeal.success = true
