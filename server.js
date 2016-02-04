@@ -23,36 +23,41 @@ flipCasper.start(flipUrl, function() { });
 
 flipCasper.waitForSelector('.results #products .product-unit', function() {
   product.flipkart = this.evaluate(function() {    
-    var product = {}
-    var $product = $('.results #products .product-unit').first()
+    var products = []
     
-    var getFeatures = function () {
-      var features = []
-      $($product.find('.pu-usp .text')).each(function() {
-        features.push($(this).text())
-      })
-      return features
-    }
+    $('.results #products .product-unit').each(function() {
+      
+      var getFeatures = function () {
+        var features = []
+        $($(this).find('.pu-usp .text')).each(function() {
+          features.push($(this).text())
+        })
+        return features
+      }
+
+      var product = {
+        image   : $(this).find('.fk-product-thumb img').attr('src'),
+        link    : "http://www.flipkart.com" + $(this).find('.fk-product-thumb').attr('href'),
+        title   : $(this).find('.pu-title a').attr('title').trim(),
+        ratings : $(this).find('.pu-rating .fk-stars-small').attr('title'),
+        reviews : $(this).find('.pu-rating').text().replace(/[^0-9]/g, ''),
+        price   : $(this).find('.pu-price .pu-final span').text(),
+        emi     : $(this).find('.pu-price .pu-emi').text(),
+        features: getFeatures()
+      }
+
+      products.push(product)
+    })
     
-    product = {
-      success : true,
-      image   : $product.find('.fk-product-thumb img').attr('src'),
-      link    : "http://www.flipkart.com" + $product.find('.fk-product-thumb').attr('href'),
-      title   : $product.find('.pu-title a').attr('title').trim(),
-      ratings : $product.find('.pu-rating .fk-stars-small').attr('title'),
-      reviews : $product.find('.pu-rating').text().replace(/[^0-9]/g, ''),
-      price   : $product.find('.pu-price .pu-final span').text(),
-      emi     : $product.find('.pu-price .pu-emi').text(),
-      features: getFeatures()
-    }
-    
-    return product
+    return { products : products }
   })
-  
+    
   if (!Boolean(product.flipkart)) {
     product.flipkart = {
       success : false
     }
+  } else {
+    product.flipkart.success = true
   }
 
 }, function() {
@@ -72,26 +77,32 @@ snapCasper.start(snapUrl, function() {})
 
 snapCasper.waitForSelector('#products', function() {
   product.snapdeal = this.evaluate(function() {
-    var product = {}
-      , $product = $('#products .product-tuple-listing').first()
+    var products = []
     
-    product = {
-      success : true,
-      image   : $product.find('.product-tuple-image img').attr('src'),
-      link    : $product.find('.product-tuple-image a').attr('href'),
-      title   : $product.find('.product-tuple-description p.product-title').text().trim(),
-      ratings : $product.find('.rating span').attr('data-rating'),
-      reviews : $product.find('.rating p.product-rating-count').text().replace(/[^0-9]/g, ''),
-      price   : $product.find('.product-tuple-description .productPrice .product-price').text()
-    }
+    $('#products .product-tuple-listing').each(function() {
+      
+      var product = {
+        image: $(this).find('.product-tuple-image img').attr('src'),
+        link: $(this).find('.product-tuple-image a').attr('href'),
+        title: $(this).find('.product-tuple-description p.product-title').text().trim(),
+        ratings: $(this).find('.rating span').attr('data-rating'),
+        reviews: $(this).find('.rating p.product-rating-count').text().replace(/[^0-9]/g, ''),
+        price: $(this).find('.product-tuple-description .productPrice .product-price').text()
+      }
+
+      products.push(product)
+    })
     
-    return product
+    return { products: products }
+    
   })
-  
+    
   if (!Boolean(product.snapdeal)) {
     product.snapdeal = {
       success : false
     }
+  } else {
+    product.snapdeal.success = true
   }
   
 }, function() {

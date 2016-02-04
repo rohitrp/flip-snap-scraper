@@ -92,12 +92,12 @@ $(document).ready(function () {
         if (data.success) {
           $('.products .flipkart, .products .snapdeal').append(container);
 
-          var flipkart = data.products.flipkart,
-            snapdeal = data.products.snapdeal,
+          var flipkart = data.results.flipkart.products[0],
+            snapdeal = data.results.snapdeal.products[0],
             $flipkart = $('.products .flipkart'),
             $snapdeal = $('.products .snapdeal')
 
-          if (data.products.flipkart.success) {
+          if (data.results.flipkart.success) {
             $('.flipkart-error').hide()
             $('.flipkart .container').show()
 
@@ -112,7 +112,7 @@ $(document).ready(function () {
             $('.flipkart .container').hide()
           }
 
-          if (data.products.snapdeal.success) {
+          if (data.results.snapdeal.success) {
             $('.snapdeal-error').hide()
             $('.snapdeal .container').show()
 
@@ -144,12 +144,12 @@ $(document).ready(function () {
   function compare($flipkart, $snapdeal, data) {
     var flipScore = 0,
       snapScore = 0,
-      flipPrice = data.products.flipkart.price || '999999999',
-      snapPrice = data.products.snapdeal.price || '999999999',
-      flipRatings = data.products.flipkart.ratings || '0',
-      snapRatings = data.products.snapdeal.ratings || '0',
-      flipReviews = data.products.flipkart.reviews || '0',
-      snapReviews = data.products.snapdeal.reviews || '0'
+      flipPrice = data.results.flipkart.price || '999999999',
+      snapPrice = data.results.snapdeal.price || '999999999',
+      flipRatings = data.results.flipkart.ratings || '0',
+      snapRatings = data.results.snapdeal.ratings || '0',
+      flipReviews = data.results.flipkart.reviews || '0',
+      snapReviews = data.results.snapdeal.reviews || '0'
 
     if (+flipPrice.replace(/[^0-9]/g, '') < +snapPrice.replace(/[^0-9]/g, '')) {
       $flipkart.find('.price').addClass('winner')

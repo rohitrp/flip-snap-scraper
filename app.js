@@ -32,7 +32,7 @@ app.get('/scrape', function (req, res) {
 
       res.json({
         "success" : results.flipkart.success || results.snapdeal.success,
-        "products": results
+        "results": results
       })
     }
   })
