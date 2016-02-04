@@ -18,13 +18,34 @@
 </head>
 
 <body>
-  <div class="search">
-    <i class="material-icons">search</i>
-    <input type="search" id="search-input">
-    
-    <div class="loading" id="loading">
-      <i class="fa fa-cog fa-spin fa-4x"></i>
+  <div class="cover">    
+    <div class="search">
+      <i class="material-icons">search</i>
+      <input type="search" id="search-input">
+
+      <div class="loading" id="loading">
+        <i class="fa fa-cog fa-spin fa-4x"></i>
+      </div>
     </div>
+  </div>
+  
+  <div class="sortby">
+    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="relevance">
+      <input type="radio" id="relevance" class="mdl-radio__button" name="options" value="1">
+      <span class="mdl-radio__label">Relevance</span>
+    </label>
+    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="popular">
+      <input type="radio" id="popular" class="mdl-radio__button" name="options" value="2">
+      <span class="mdl-radio__label">Popular</span>
+    </label>
+    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="highprice">
+      <input type="radio" id="highprice" class="mdl-radio__button" name="options" value="3">
+      <span class="mdl-radio__label">High Price</span>
+    </label>
+    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="lowprice">
+      <input type="radio" id="lowprice" class="mdl-radio__button" name="options" value="4">
+      <span class="mdl-radio__label">Low Price</span>
+    </label>
   </div>
   
   <div class="error">

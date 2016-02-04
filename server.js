@@ -13,11 +13,11 @@ var casper = require('casper')
       }
     }
   , search = casper.create().cli.args[0]
-  , flipUrl = 'http://www.flipkart.com/search?q=' + search
-  , snapUrl = 'http://www.snapdeal.com/search?keyword=' + search
+  , flipSort = casper.create().cli.args[1]
+  , snapSort = casper.create().cli.args[2]
+  , flipUrl = 'http://www.flipkart.com/search?p%5B%5D=sort%3D' + flipSort + '&q=' + search
+  , snapUrl = 'http://www.snapdeal.com/search?keyword=' + search + '&sort=' + snapSort
   , resultPath = './data/result.json'
-
-console.log(search)
 
 flipCasper.start(flipUrl, function() { });
 

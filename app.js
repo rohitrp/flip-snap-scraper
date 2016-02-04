@@ -14,9 +14,13 @@ app.get('/', function (req, res) {
 })
 
 app.get('/scrape', function (req, res) {
-  var searchQuery = url.parse(req.url, true).query.q.replace(/[ ]+/g, '+')
+
+  var args = url.parse(req.url, true).query
+    , searchQuery = args.q.replace(/[ ]+/g, '+')
+    , flipSort = args.flipSort
+    , snapSort = args.snapSort
   console.log(searchQuery)
-  exec('casperjs server.js ' + searchQuery, function(err, stdout, stderr) {
+  exec('casperjs server.js ' + searchQuery + ' ' + flipSort + ' ' + snapSort, function(err, stdout, stderr) {
     if (err) {
       console.log(err)
       res.json({

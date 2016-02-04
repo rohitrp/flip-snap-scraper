@@ -24,8 +24,8 @@ var testData = {
   }
 };
 
-var container = 
-      `
+var container =
+  `
       <div class="container">
         <div class="image">
         </div>
@@ -48,38 +48,60 @@ $(document).ready(function () {
   $('.loading').hide();
   $('.products').hide();
   $('.error').hide();
-  
+
   function getResults() {
     $('.products').hide();
     $('.products .container').remove();
     $('.flipkart, .snapdeal').removeClass('winner loser');
-    $('.error').hide();    
+    $('.error').hide();
     $('.loading').show();
-    
+
     var search = $('#search-input').val();
 
+    var flipSort, snapSort;
+    
+    switch ($('input:checked').attr('value')) {
+      case '2':
+        flipSort = 'popularity';
+        snapSort = 'plrty';
+        break;
+      case '3':
+        flipSort = 'price_desc';
+        snapSort = 'phtl';
+        break;
+      case '4':
+        flipSort = 'price_asc';
+        snapSort = 'plth';
+        break;
+      default:
+        flipSort = 'relevance';
+        snapSort = 'rlvncy';
+    }
+    
+    console.log(flipSort, snapSort);
+    
     $.ajax({
-      url: '/scrape?q=' + search,
+      url: '/scrape?q=' + search + '&flipSort=' + flipSort + '&snapSort=' + snapSort,
       dataType: 'json',
       complete: function (res, status) {
         $('#loading').hide()
       },
       success: function (data) {
         console.log(data)
-        
+
         if (data.success) {
           $('.products .flipkart, .products .snapdeal').append(container);
-          
+
           var flipkart = data.products.flipkart,
             snapdeal = data.products.snapdeal,
             $flipkart = $('.products .flipkart'),
             $snapdeal = $('.products .snapdeal')
-                      
+
           if (data.products.flipkart.success) {
             $('.flipkart-error').hide()
             $('.flipkart .container').show()
 
-            $flipkart.find('.image').css('background-image', 'url('+flipkart.image+')');
+            $flipkart.find('.image').css('background-image', 'url(' + flipkart.image + ')');
             $flipkart.find('.price h4').text(flipkart.price);
             $flipkart.find('.title a').attr('href', flipkart.link);
             $flipkart.find('.title h3').text(flipkart.title);
@@ -89,12 +111,12 @@ $(document).ready(function () {
             $('.flipkart-error').show()
             $('.flipkart .container').hide()
           }
-        
+
           if (data.products.snapdeal.success) {
             $('.snapdeal-error').hide()
             $('.snapdeal .container').show()
-            
-            $snapdeal.find('.image').css('background-image', 'url('+snapdeal.image+')');
+
+            $snapdeal.find('.image').css('background-image', 'url(' + snapdeal.image + ')');
             $snapdeal.find('.price h4').text(snapdeal.price);
             $snapdeal.find('.title a').attr('href', snapdeal.link);
             $snapdeal.find('.title h3').text(snapdeal.title);
@@ -107,35 +129,28 @@ $(document).ready(function () {
           }
 
           $('.products').show();
-          
+
           compare($flipkart, $snapdeal, data);
         } else {
           $('.error').show()
-        } 
+        }
       },
-      error: function (res) {        
-        $('.error').show();         
+      error: function (res) {
+        $('.error').show();
       }
     })
   }
 
   function compare($flipkart, $snapdeal, data) {
-    var flipScore = 0
-      , snapScore = 0
-      , flipPrice = data.products.flipkart.price || '999999999'
-      , snapPrice = data.products.snapdeal.price || '999999999'
-      , flipRatings = data.products.flipkart.ratings || '0'
-      , snapRatings = data.products.snapdeal.ratings || '0'
-      , flipReviews = data.products.flipkart.reviews || '0'
-      , snapReviews = data.products.snapdeal.reviews || '0'
-    
-    console.log(flipPrice);
-    console.log(snapPrice);
-    console.log(flipRatings);
-    console.log(snapRatings);
-    console.log(flipReviews);
-    console.log(snapReviews);
-    console.log(+flipRatings.replace(/[^0-9.]+/g, '') > +snapRatings.replace(/[^0-9.]+/g, ''));
+    var flipScore = 0,
+      snapScore = 0,
+      flipPrice = data.products.flipkart.price || '999999999',
+      snapPrice = data.products.snapdeal.price || '999999999',
+      flipRatings = data.products.flipkart.ratings || '0',
+      snapRatings = data.products.snapdeal.ratings || '0',
+      flipReviews = data.products.flipkart.reviews || '0',
+      snapReviews = data.products.snapdeal.reviews || '0'
+
     if (+flipPrice.replace(/[^0-9]/g, '') < +snapPrice.replace(/[^0-9]/g, '')) {
       $flipkart.find('.price').addClass('winner')
       $snapdeal.find('.price').addClass('loser')
@@ -145,7 +160,7 @@ $(document).ready(function () {
       $flipkart.find('.price').addClass('loser')
       snapScore++;
     }
-    
+
     if (+flipRatings.replace(/[^0-9.]+/g, '') > +snapRatings.replace(/[^0-9.]+/g, '')) {
       $flipkart.find('.ratings').addClass('winner')
       $snapdeal.find('.ratings').addClass('loser')
@@ -154,8 +169,8 @@ $(document).ready(function () {
       $snapdeal.find('.ratings').addClass('winner')
       $flipkart.find('.ratings').addClass('loser')
       snapScore++;
-    } 
-    
+    }
+
     if (+flipReviews.replace(/[^0-9]+/g, '') > +snapReviews.replace(/[^0-9]+/g, '')) {
       $flipkart.find('.reviews').addClass('winner')
       $snapdeal.find('.reviews').addClass('loser')
@@ -165,33 +180,37 @@ $(document).ready(function () {
       $flipkart.find('.reviews').addClass('loser')
       snapScore++;
     }
-    
+
     $flipkart.addClass(flipScore > snapScore ? "winner" : "loser");
     $snapdeal.addClass(flipScore > snapScore ? "loser" : "winner");
   };
-  
+
   $('#search-input').keyup(function (e) {
     adjustSearchBar();
   });
-  
-  $(document).keypress(function(e) {
+
+  $(document).keypress(function (e) {
     $('#search-input').focus();
     adjustSearchBar();
-    
+
     if (e.which == 13) {
       getResults()
 
       return false
     }
   });
-
+  
+  $('.sortby input').click(function() {
+    getResults();
+  });
+  
   function adjustSearchBar() {
     var width = "300px";
-    var borderColor = "#3F51B5";
+    var borderColor = "#fff";
 
     if ($("#search-input").val() == "") {
       width = "0px";
-      borderColor = "#fff";
+      borderColor = "transparent";
     }
 
     $('#search-input').css('width', width);
@@ -200,7 +219,7 @@ $(document).ready(function () {
 
   $('.search i').click(function () {
     $('#search-input').css('width', '300px');
-    $('#search-input').css('border-color', '#3F51B5');
+    $('#search-input').css('border-color', '#fff');
     $('#search-input').focus();
 
     if ($('#search-input').val() != '') getResults();
