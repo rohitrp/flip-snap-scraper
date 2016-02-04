@@ -201,7 +201,7 @@ $(document).ready(function () {
   });
   
   $('.sortby input').click(function() {
-    getResults();
+    if ($('#search-input').val() !== '') getResults();
   });
   
   function adjustSearchBar() {
