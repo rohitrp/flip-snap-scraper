@@ -1,7 +1,8 @@
 body {
   font-family: 'Roboto', sans-serif;
   font-size: 12px;
-  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 input {
@@ -443,7 +444,8 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 
 .more-results-head .container {
   position: relative;
-  top: 40%;
+  top: 20%;
+  line-height: 1.1;
 }
 
 .truncate {
@@ -533,4 +535,10 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
   margin-top: 50px;
   text-align: center;
   color: #777;
+}
+
+@media (max-width: 400px) {
+  body {
+    overflow-x: scroll;
+  }
 }

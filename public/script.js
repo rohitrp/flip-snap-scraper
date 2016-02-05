@@ -138,8 +138,7 @@ $(document).ready(function () {
       },
       error: function (res) {
         $('.error').show();
-      },
-      timeout: 20000
+      }
     })
   }
 
@@ -243,7 +242,7 @@ $(document).ready(function () {
   
   $('#more-results').click(function() {
     $('.more-results').slideDown('slow', function() {
-      $('html, body').animate({scrollTop: $('#from').offset().top});
+      $('html, body').animate({scrollTop: $('#filter').offset().top});
     });
   });
   
