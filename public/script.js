@@ -50,6 +50,9 @@ $(document).ready(function () {
   $('.loading').hide();
   $('.products').hide();
   $('.error').hide();
+  $('.more-results').hide();
+  $('.more-results-button').hide();
+  $('.more-results-head').hide();
 
   function getResults() {
     $('.products').hide();
@@ -57,11 +60,14 @@ $(document).ready(function () {
     $('.products .flipkart, .products .snapdeal').removeClass('winner loser');
     $('.error').hide();
     $('.loading').show();
+    $('.more-results').hide();
+    $('.more-results-button').hide();
+    $('.more-results-head').hide();
 
     var search = $('#search-input').val();
 
     var flipSort, snapSort;
-    
+
     switch ($('input:checked').attr('value')) {
       case '2':
         flipSort = 'popularity';
@@ -79,9 +85,9 @@ $(document).ready(function () {
         flipSort = 'relevance';
         snapSort = 'rlvncy';
     }
-    
+
     console.log(flipSort, snapSort);
-    
+
     $.ajax({
       url: '/scrape?q=' + search + '&flipSort=' + flipSort + '&snapSort=' + snapSort,
       dataType: 'json',
@@ -99,7 +105,7 @@ $(document).ready(function () {
 
           if (data.results.flipkart.success) {
             var flipkart = data.results.flipkart.products[0]
-            
+
             $('.flipkart-error').hide()
             $('.products .flipkart .container').show()
 
@@ -116,7 +122,7 @@ $(document).ready(function () {
 
           if (data.results.snapdeal.success) {
             var snapdeal = data.results.snapdeal.products[0]
-            
+
             $('.snapdeal-error').hide()
             $('.products .snapdeal .container').show()
 
@@ -132,12 +138,15 @@ $(document).ready(function () {
             $('.products .snapdeal .container').hide()
           }
 
-          $('.products').show();
+          $('.products').fadeIn();
+          $('.more-results-button').show();
+          $('.more-results-head').show();
 
-          compare($flipkart, 
-                  $snapdeal, 
-                  data.results.flipkart.success ? data.results.flipkart.products[0] : {},
-                  data.results.snapdeal.success ? data.results.snapdeal.products[0] : {});
+
+          compare($flipkart,
+            $snapdeal,
+            data.results.flipkart.success ? data.results.flipkart.products[0] : {},
+            data.results.snapdeal.success ? data.results.snapdeal.products[0] : {});
         } else {
           $('.error').show()
         }
@@ -158,9 +167,9 @@ $(document).ready(function () {
       snapRatings = snapData.ratings || '0',
       flipReviews = flipData.reviews || '0',
       snapReviews = snapData.reviews || '0'
-    
+
     console.log(flipPrice, snapPrice);
-    
+
     if (+flipPrice.replace(/[^0-9]/g, '') < +snapPrice.replace(/[^0-9]/g, '')) {
       $flipkart.find('.price').addClass('winner')
       $snapdeal.find('.price').addClass('loser')
@@ -200,22 +209,26 @@ $(document).ready(function () {
   });
 
   $(document).keypress(function (e) {
-    $('#search-input').focus();
-    adjustSearchBar();
+    var $target = $(e.target);
 
-    if (e.which == 13) {
+    if (!$target.is($('.filter input'))) {
+      $('#search-input').focus();
+      adjustSearchBar();
+    }
+
+    if (e.which == 13 && $target.is($('#search-input'))) {
       getResults()
 
       return false
     }
   });
-  
-  $('.sortby input').click(function() {
+
+  $('.sortby input').click(function () {
     if ($('#search-input').val() !== '') getResults();
   });
-  
+
   function adjustSearchBar() {
-    var width = "300px";
+    var width = "250px";
     var borderColor = "#fff";
 
     if ($("#search-input").val() == "") {
@@ -228,7 +241,7 @@ $(document).ready(function () {
   };
 
   $('.search i').click(function () {
-    $('#search-input').css('width', '300px');
+    $('#search-input').css('width', '250px');
     $('#search-input').css('border-color', '#fff');
     $('#search-input').focus();
 
@@ -242,4 +255,11 @@ $(document).ready(function () {
     }
   });
   
+  $('#more-results').click(function() {
+    $('.more-results').slideDown('slow');
+  });
+  
+  $('.more-results form').submit(function(e) {
+    e.preventDefault();
+  });
 });

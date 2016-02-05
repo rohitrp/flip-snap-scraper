@@ -31,7 +31,7 @@
   
   <div class="sortby">
     <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="relevance">
-      <input type="radio" id="relevance" class="mdl-radio__button" name="options" value="1">
+      <input type="radio" id="relevance" class="mdl-radio__button" name="options" value="1" checked>
       <span class="mdl-radio__label">Relevance</span>
     </label>
     <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="popular">
@@ -71,6 +71,108 @@
         <p>Data not available</p>
       </div>
 
+    </div>
+  </div>
+  
+  <div class="more-results-head">
+    <div class="container">
+      Need more suggestions?
+    </div>
+  </div>
+  
+  <div class="more-results-button">
+    <div class="container">
+      <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id="more-results">Show more results</button>
+    </div>
+  </div>
+  
+  <div class="more-results">
+    <div class="filter-cover">
+      <div class="filter-title">Filter</div>
+      
+      <div class="filter">
+        <div class="price-range filter-type">
+          <div class="title">Price Range</div>
+          <div class="input">
+            <form action="#">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="from">
+                <label class="mdl-textfield__label" for="from">From</label>
+                <span class="mdl-textfield__error">Input is not a number!</span>
+              </div>
+            </form>
+            <form action="#">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="to">
+                <label class="mdl-textfield__label" for="to">To</label>
+                <span class="mdl-textfield__error">Input is not a number!</span>
+              </div>
+            </form>
+          </div>
+        </div>
+        
+        <div class="reviews filter-type">
+          <div class="title">Reviews</div>
+          <div class="input">
+            <form action="#">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="reviews">
+                <label class="mdl-textfield__label" for="reviews">Reviews</label>
+                <span class="mdl-textfield__error">Input is not a number!</span>
+              </div>
+            </form>
+          </div>
+        </div>     
+         
+        <div class="ratings filter-type">
+          <div class="title">Ratings</div>
+          <div class="input">
+            <form action="#">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="ratings">
+                <label class="mdl-textfield__label" for="ratings">Ratings</label>
+                <span class="mdl-textfield__error">Input is not a number!</span>
+              </div>
+            </form>
+          </div>
+        </div>
+        
+        <div class="keyword filter-type">
+          <div class="title">Keyword</div>
+          <div class="input">
+            <form action="#">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="keyword">
+                <label class="mdl-textfield__label" for="keyword">Keyword</label>
+              </div>
+            </form>
+          </div>
+        </div>        
+      </div>
+      
+      <div class="filter-website">
+        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="flipkart-label">
+          <input type="checkbox" id="flipkart-label" class="mdl-checkbox__input" checked>
+          <span class="mdl-checkbox__label">Flipkart</span>
+        </label>
+        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="snapdeal-label">
+          <input type="checkbox" id="snapdeal-label" class="mdl-checkbox__input" checked>
+          <span class="mdl-checkbox__label">Snapdeal</span>
+        </label>
+      </div>
+      <div class="filter-button">
+        <div class="container">
+          <span>Submit</span>
+        </div>
+      </div>
+    </div>
+    
+
+    <div class="flipkart">
+      
+    </div>
+    <div class="snapdeal">
+      
     </div>
   </div>
 </body>
