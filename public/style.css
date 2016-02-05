@@ -537,7 +537,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
   color: #777;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 390px) {
   body {
     overflow-x: scroll;
   }

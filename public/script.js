@@ -244,6 +244,9 @@ $(document).ready(function () {
     $('.more-results').slideDown('slow', function() {
       $('html, body').animate({scrollTop: $('#filter').offset().top});
     });
+    
+    $('.more-results .flipkart .container').remove();
+    $('.more-results .snapdeal .container').remove();
   });
   
   $('.more-results form').submit(function(e) {
