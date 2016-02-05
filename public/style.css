@@ -30,7 +30,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 }
 
 .search i:hover {
-  color: rgb(233, 30, 99);
+  color: rgb(139, 195, 74);
 }
 
 #search-input {
