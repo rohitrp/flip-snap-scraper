@@ -446,3 +446,91 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
   top: 40%;
 }
 
+.truncate {
+  width: 180px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.more-results .flipkart .container,
+.more-results .snapdeal .container {
+  display: inline-block;
+  max-width: 180px; 
+}
+
+.more-results .flipkart,
+.more-results .snapdeal {
+  max-width: 1500px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+.more-results .flipkart .container,
+.more-results .snapdeal .container {
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid;
+  border-color: #3D7EAA; /* fallback for old browsers */
+  border-color: -webkit-linear-gradient(to left, #3D7EAA , #FFE47A); /* Chrome 10-25, Safari 5.1-6 */
+  border-color: linear-gradient(to left, #3D7EAA , #FFE47A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  border-radius: 20px;
+}
+
+.more-results .flipkart .container .image,
+.more-results .snapdeal .container .image {
+  max-width: 80px;
+  margin: 0 auto;
+  height: 200px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.more-results .flipkart .container .price h4,
+.more-results .snapdeal .container .price h4 {
+  font-size: 1.4em;
+}
+
+.more-results .flipkart .container .title h3,
+.more-results .snapdeal .container .title h3 {
+  font-size: 2em;
+}
+
+.products .flipkart .flipkart-logo {
+  background-color: #027CD5;
+}
+
+.products .snapdeal .snapdeal-logo {
+  background-color: #37474E;
+  padding: 0;
+}
+
+.more-results .flipkart-img,
+.more-results .snapdeal-img {
+  background-color: #027CD5;
+  background: -webkit-linear-gradient(to left, #2BC0E4 , #EAECC6);; 
+  background: linear-gradient(to left, #2BC0E4 , #EAECC6);; 
+  width: 200px;
+  text-align: center;
+  padding: 20px;
+  margin: 40px auto;
+}
+
+.more-results .snapdeal-img {
+  padding: 0;
+  height: 80px;
+  width: 240px;
+}
+
+.more-results .snapdeal-img img {
+  height: 80px;
+}
+
+.more-results-error {
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 4em;
+  margin-top: 50px;
+  text-align: center;
+  color: #777;
+}

@@ -27,10 +27,10 @@ flipCasper.waitForSelector('.results #products .product-unit', function() {
     
     $('.results #products .product-unit').each(function() {
       
-      var getFeatures = function () {
+      var getFeatures = function($this) {
         var features = []
-        $($(this).find('.pu-usp .text')).each(function() {
-          features.push($(this).text())
+        $($this.find('.pu-usp .text')).each(function() {
+          features.push($this.text())
         })
         return features
       }
@@ -43,7 +43,7 @@ flipCasper.waitForSelector('.results #products .product-unit', function() {
         reviews : $(this).find('.pu-rating').text().replace(/[^0-9]/g, ''),
         price   : $(this).find('.pu-price .pu-final span').text(),
         emi     : $(this).find('.pu-price .pu-emi').text(),
-        features: getFeatures()
+        features: getFeatures($(this))
       }
 
       products.push(product)
