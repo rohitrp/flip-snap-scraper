@@ -24,6 +24,8 @@ var testData = {
   }
 };
 
+var results;
+
 var container =
   `
       <div class="container">
@@ -52,7 +54,7 @@ $(document).ready(function () {
   function getResults() {
     $('.products').hide();
     $('.products .container').remove();
-    $('.flipkart, .snapdeal').removeClass('winner loser');
+    $('.products .flipkart, .products .snapdeal').removeClass('winner loser');
     $('.error').hide();
     $('.loading').show();
 
@@ -88,7 +90,7 @@ $(document).ready(function () {
       },
       success: function (data) {
         console.log(data)
-
+        results = data;
         if (data.success) {
           $('.products .flipkart, .products .snapdeal').append(container);
 
@@ -99,7 +101,7 @@ $(document).ready(function () {
             var flipkart = data.results.flipkart.products[0]
             
             $('.flipkart-error').hide()
-            $('.flipkart .container').show()
+            $('.products .flipkart .container').show()
 
             $flipkart.find('.image').css('background-image', 'url(' + flipkart.image + ')');
             $flipkart.find('.price h4').text(flipkart.price);
@@ -109,14 +111,14 @@ $(document).ready(function () {
             $flipkart.find('.reviews span').text((flipkart.reviews || "0") + " reviews");
           } else {
             $('.flipkart-error').show()
-            $('.flipkart .container').hide()
+            $('.products .flipkart .container').hide()
           }
 
           if (data.results.snapdeal.success) {
             var snapdeal = data.results.snapdeal.products[0]
             
             $('.snapdeal-error').hide()
-            $('.snapdeal .container').show()
+            $('.products .snapdeal .container').show()
 
             $snapdeal.find('.image').css('background-image', 'url(' + snapdeal.image + ')');
             $snapdeal.find('.price h4').text(snapdeal.price);
@@ -127,7 +129,7 @@ $(document).ready(function () {
 
           } else {
             $('.snapdeal-error').show()
-            $('.snapdeal .container').hide()
+            $('.products .snapdeal .container').hide()
           }
 
           $('.products').show();
@@ -147,15 +149,18 @@ $(document).ready(function () {
   }
 
   function compare($flipkart, $snapdeal, flipData, snapData) {
+
     var flipScore = 0,
       snapScore = 0,
-      flipPrice = flipData.price || '999999999',
-      snapPrice = snapData.price || '999999999',
+      flipPrice = (flipData.price || '999999999').replace(/Rs./gi, ''),
+      snapPrice = (snapData.price || '999999999').replace(/Rs./gi, ''),
       flipRatings = flipData.ratings || '0',
       snapRatings = snapData.ratings || '0',
       flipReviews = flipData.reviews || '0',
       snapReviews = snapData.reviews || '0'
-
+    
+    console.log(flipPrice, snapPrice);
+    
     if (+flipPrice.replace(/[^0-9]/g, '') < +snapPrice.replace(/[^0-9]/g, '')) {
       $flipkart.find('.price').addClass('winner')
       $snapdeal.find('.price').addClass('loser')
@@ -235,5 +240,6 @@ $(document).ready(function () {
     if (!target.is($(".search i")) && !target.is($('#search-input'))) {
       adjustSearchBar();
     }
-  })
+  });
+  
 });
