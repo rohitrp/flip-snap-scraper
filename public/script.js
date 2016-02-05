@@ -132,7 +132,10 @@ $(document).ready(function () {
 
           $('.products').show();
 
-          compare($flipkart, $snapdeal, data);
+          compare($flipkart, 
+                  $snapdeal, 
+                  data.results.flipkart.success ? data.results.flipkart.products[0] : {},
+                  data.results.snapdeal.success ? data.results.snapdeal.products[0] : {});
         } else {
           $('.error').show()
         }
@@ -143,15 +146,15 @@ $(document).ready(function () {
     })
   }
 
-  function compare($flipkart, $snapdeal, data) {
+  function compare($flipkart, $snapdeal, flipData, snapData) {
     var flipScore = 0,
       snapScore = 0,
-      flipPrice = data.results.flipkart.price || '999999999',
-      snapPrice = data.results.snapdeal.price || '999999999',
-      flipRatings = data.results.flipkart.ratings || '0',
-      snapRatings = data.results.snapdeal.ratings || '0',
-      flipReviews = data.results.flipkart.reviews || '0',
-      snapReviews = data.results.snapdeal.reviews || '0'
+      flipPrice = flipData.price || '999999999',
+      snapPrice = snapData.price || '999999999',
+      flipRatings = flipData.ratings || '0',
+      snapRatings = snapData.ratings || '0',
+      flipReviews = flipData.reviews || '0',
+      snapReviews = snapData.reviews || '0'
 
     if (+flipPrice.replace(/[^0-9]/g, '') < +snapPrice.replace(/[^0-9]/g, '')) {
       $flipkart.find('.price').addClass('winner')
