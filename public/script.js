@@ -84,7 +84,10 @@ $(document).ready(function () {
 
           var $flipkart = $('.products .flipkart'),
             $snapdeal = $('.products .snapdeal')
-
+          
+          $flipkart.find('.title h3').removeClass('truncate');
+          $snapdeal.find('.title h3').removeClass('truncate');
+          
           if (data.results.flipkart.success) {
             var flipkart = data.results.flipkart.products[0]
 
@@ -135,7 +138,8 @@ $(document).ready(function () {
       },
       error: function (res) {
         $('.error').show();
-      }
+      },
+      timeout: 20000
     })
   }
 
@@ -238,7 +242,9 @@ $(document).ready(function () {
   });
   
   $('#more-results').click(function() {
-    $('.more-results').slideDown('slow');
+    $('.more-results').slideDown('slow', function() {
+      $('html, body').animate({scrollTop: $('#from').offset().top});
+    });
   });
   
   $('.more-results form').submit(function(e) {
