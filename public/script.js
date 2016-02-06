@@ -23,7 +23,6 @@ var container =
       ';
 
 $(document).ready(function () {
-  $('.loading').hide();
   $('.products').hide();
   $('.error').hide();
   $('.more-results').hide();
@@ -38,7 +37,7 @@ $(document).ready(function () {
     $('.products .container').remove();
     $('.products .flipkart, .products .snapdeal').removeClass('winner loser');
     $('.error').hide();
-    $('.loading').show();
+    $('.search i').addClass('search-animation');
     $('.more-results').hide();
     $('.more-results-button').hide();
     $('.more-results-head').hide();
@@ -74,7 +73,7 @@ $(document).ready(function () {
       url: '/scrape?q=' + search + '&flipSort=' + flipSort + '&snapSort=' + snapSort,
       dataType: 'json',
       complete: function (res, status) {
-        $('#loading').hide()
+        $('.search i').removeClass('search-animation');
       },
       success: function (data) {
         console.log(data)
@@ -140,7 +139,7 @@ $(document).ready(function () {
         $('.error').show();
       }
     })
-  }
+  };
 
   function compare($flipkart, $snapdeal, flipData, snapData) {
 
@@ -202,9 +201,9 @@ $(document).ready(function () {
     }
 
     if (e.which == 13 && $target.is($('#search-input'))) {
-      getResults()
+      getResults();
 
-      return false
+      return false;
     }
   });
 
