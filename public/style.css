@@ -17,9 +17,9 @@ input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration { display: none; }
 
 .search {
-  max-width: 500px;
+  max-width: 60px;
   margin: 0 auto;
-  padding-top: 200px;
+  padding-top: 140px;
 }
 
 .search i {
@@ -29,7 +29,12 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 }
 
 .search i:hover {
-  color: rgb(139, 195, 74);
+  color: rgb(205, 220, 57);
+}
+
+.search-input {
+  margin: 40px auto;
+  text-align: center;
 }
 
 #search-input {
@@ -40,14 +45,17 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
   font-size: 3em;
   color: white;
   background-color: transparent;
+  text-align: center;
   
   -webkit-transition: all .5s;
           transition: all .5s;
 }
 
 .loading {
-  margin-top: 10px;
-  margin-left: 37%;
+  margin: 0 auto;
+  color: #fff;
+  width: 50px;
+  
 }
 
 .products {

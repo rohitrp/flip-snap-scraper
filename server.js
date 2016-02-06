@@ -30,7 +30,7 @@ flipCasper.waitForSelector('.results #products .product-unit', function() {
       var getFeatures = function($this) {
         var features = []
         $($this.find('.pu-usp .text')).each(function() {
-          features.push($this.text())
+          features.push($this.text().replace(/\n+/g, ''))
         })
         return features
       }
