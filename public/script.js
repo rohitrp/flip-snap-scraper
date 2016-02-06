@@ -3,24 +3,24 @@ var testData = {"success":true,"results":{"flipkart":{"products":[{"emi":"EMI fr
 var results;
 
 var container =
-  `
-      <div class="container">
-        <div class="image">
-        </div>
-        <div class="price">
-          <h4></h4>
-        </div>
-        <div class="title">
-          <a target="_blank"><h3 class="truncate"></h3></a>
-        </div>
-        <div class="ratings">
-          <span></span>
-        </div>
-        <div class="reviews">
-          <span></span>
-        </div>
-      </div>
-      `;
+    '\
+      <div class="container">\
+        <div class="image">\
+        </div>\
+        <div class="price">\
+          <h4></h4>\
+        </div>\
+        <div class="title">\
+          <a target="_blank"><h3 class="truncate"></h3></a>\
+        </div>\
+        <div class="ratings">\
+          <span></span>\
+        </div>\
+        <div class="reviews">\
+          <span></span>\
+        </div>\
+      </div>\
+      ';
 
 $(document).ready(function () {
   $('.loading').hide();
