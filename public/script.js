@@ -67,8 +67,6 @@ $(document).ready(function () {
         snapSort = 'rlvncy';
     }
 
-    console.log(flipSort, snapSort);
-
     $.ajax({
       url: '/scrape?q=' + search + '&flipSort=' + flipSort + '&snapSort=' + snapSort,
       dataType: 'json',
@@ -76,7 +74,6 @@ $(document).ready(function () {
         $('.search i').removeClass('search-animation');
       },
       success: function (data) {
-        console.log(data)
         results = data;
         if (data.success) {
           $('.products .flipkart, .products .snapdeal').append(container);
@@ -151,8 +148,6 @@ $(document).ready(function () {
       snapRatings = snapData.ratings || '0',
       flipReviews = flipData.reviews || '0',
       snapReviews = snapData.reviews || '0'
-
-    console.log(flipPrice, snapPrice);
 
     if (+flipPrice.replace(/[^0-9]/g, '') < +snapPrice.replace(/[^0-9]/g, '')) {
       $flipkart.find('.price').addClass('winner')

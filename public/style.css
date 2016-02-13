@@ -69,6 +69,7 @@ img {
   float: left;
   margin: 0;
   padding: 0;
+  text-align: right;
   position: absolute;
   -moz-animation: 4s linear 0s normal none infinite change;
   animation: 4s linear 0s normal none infinite change;
@@ -187,12 +188,9 @@ img {
 */
 
 .products {
-  max-width: 1000px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+  max-width: 1500px;
   margin: 0 auto;
+  text-align: center;
 }
 
 .products div {
@@ -207,9 +205,9 @@ img {
 .products .flipkart, .products .snapdeal {
   max-width: 500px;
   margin: 10px;
-  padding: 10px;
   border: 1px solid #aaa;
   border-radius: 30px;
+  display: inline-block;
 }
 
 .products .image {
@@ -221,8 +219,14 @@ img {
   background-position: center;
 }
 
+.products .reviews,
+.products .ratings {
+  max-width: 100%;
+}
+
 .products span {
   font-size: 2em;
+  text-align: center;
 }
 
 .error {
