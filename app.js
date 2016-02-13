@@ -7,7 +7,7 @@ var express = require('express')
   , port = process.env.PORT || 5000
 
 app.use('/', express.static(__dirname + '/public'))
-app.use('/', express.static(__dirname + '/data'))
+app.use('/data', express.static(__dirname + '/data'))
 
 app.get('/', function (req, res) {
   res.sendFile(process.cwd() + '/public/index.html')
