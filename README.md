@@ -3,7 +3,7 @@
 A web scraper that pulls data from [Flipkart](http://www.flipkart.com) and [Snapdeal](http://www.snapdeal.com) based on the search keyword.
 
 ## Working Version
-This project is hosted on [Heroku](http://www.heroku.com). Link - [FlipSnap Scraper](http://www.flip-snap-scraper.herokuapp.com).
+This project is hosted on [Heroku](http://www.heroku.com). Link - [FlipSnap Scraper](http://flip-snap-scraper.herokuapp.com).
 
 ## Run It On Your Machine
 
