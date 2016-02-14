@@ -66,8 +66,10 @@ $(document).ready(function () {
         flipSort = 'relevance';
         snapSort = 'rlvncy';
     }
-
-    $.ajax({
+    
+    var xhr = null;
+    
+    xhr = $.ajax({
       url: '/scrape?q=' + search + '&flipSort=' + flipSort + '&snapSort=' + snapSort,
       dataType: 'json',
       complete: function (res, status) {
