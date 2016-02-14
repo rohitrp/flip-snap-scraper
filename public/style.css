@@ -199,7 +199,7 @@ img {
 }
 
 .col-6 {
-  width: 50%;
+  width: 100%;
 }
 
 .products .flipkart, .products .snapdeal {
@@ -675,4 +675,28 @@ img {
   margin-top: 50px;
   text-align: center;
   color: #777;
+}
+
+@media (max-width: 550px) {
+  .products .flipkart, .products .snapdeal {
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 450px) {
+  .products .flipkart, .products .snapdeal {
+    max-width: 350px;
+  }
+}
+
+@media (max-width: 400px) {
+  .products .flipkart, .products .snapdeal {
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 350px) {
+  .products .flipkart, .products .snapdeal {
+    max-width: 250px;
+  }
 }
