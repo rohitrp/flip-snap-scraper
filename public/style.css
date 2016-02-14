@@ -208,6 +208,7 @@ img {
   border: 1px solid #aaa;
   border-radius: 30px;
   display: inline-block;
+  vertical-align: top;
 }
 
 .products .image {
