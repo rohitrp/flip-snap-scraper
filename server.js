@@ -27,13 +27,13 @@ flipCasper.waitForSelector('.results #products .product-unit', function() {
     
     $('.results #products .product-unit').each(function() {
       
-      var getFeatures = function($this) {
-        var features = []
-        $($this.find('.pu-usp .text')).each(function() {
-          features.push($this.text().replace(/\n+/g, ''))
-        })
-        return features
-      }
+//      var getFeatures = function($this) {
+//        var features = []
+//        $($this.find('.pu-usp .text')).each(function() {
+//          features.push($this.text().replace(/\n+/g, ''))
+//        })
+//        return features
+//      }
 
       var product = {
         image   : $(this).find('.fk-product-thumb img').attr('src'),
@@ -41,9 +41,9 @@ flipCasper.waitForSelector('.results #products .product-unit', function() {
         title   : $(this).find('.pu-title a').attr('title').trim(),
         ratings : $(this).find('.pu-rating .fk-stars-small').attr('title'),
         reviews : $(this).find('.pu-rating').text().replace(/[^0-9]/g, ''),
-        price   : $(this).find('.pu-price .pu-final span').text(),
-        emi     : $(this).find('.pu-price .pu-emi').text(),
-        features: getFeatures($(this))
+        price   : $(this).find('.pu-price .pu-final span').text()
+//        emi     : $(this).find('.pu-price .pu-emi').text(),
+//        features: getFeatures($(this))
       }
 
       products.push(product)
