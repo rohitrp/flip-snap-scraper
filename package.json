@@ -9,8 +9,8 @@
   "author": "Rohit Prasad",
   "private": true,
   "dependencies": {
-    "casper": "latest",
-    "express": "latest",
-    "request": "latest"
+    "casper": "0.1.1",
+    "express": "4.13.4",
+    "request": "2.69.0"
   }
 }
