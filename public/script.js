@@ -45,6 +45,8 @@ $(document).ready(function () {
     $('.more-results .flipkart-img').hide();
     $('.more-results .snapdeal-img').hide();
 
+    $('.products .flipkart, .products .snapdeal').append(container);
+
     var search = $('#search-input').val();
 
     var flipSort, snapSort;
@@ -78,8 +80,6 @@ $(document).ready(function () {
       success: function (data) {
         results = data;
         if (data.success) {
-          $('.products .flipkart, .products .snapdeal').append(container);
-
           var $flipkart = $('.products .flipkart'),
             $snapdeal = $('.products .snapdeal')
           
